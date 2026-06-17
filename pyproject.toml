@@ -1,0 +1,18 @@
+[project]
+name = "bookstore"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Arthur Faggundês",email = "arthurhfagundes6@gmail.com"}
+]
+requires-python = "^3.7"
+dependencies = [
+    "pytest (==6.2.5)",
+    "factory-boy (==3.2.0)",
+    "django (==3.2.8)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
