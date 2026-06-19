@@ -1,6 +1,6 @@
 from django.db import models
 
-class Category(models.model):
+class Category(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True) # tipo uma id
     description = models.TextField(max_length=200, blank=True, null=True)
