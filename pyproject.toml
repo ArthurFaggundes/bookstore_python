@@ -10,7 +10,9 @@ dependencies = [
     "pytest (==6.2.5)",
     "factory-boy (==3.2.0)",
     "django (==3.2.8)",
-    "djangorestframework (==3.14)"
+    "djangorestframework (==3.14)",
+    "pytest-django (==4.5.0)",
+    "anyio (==3.7.1)"
 ]
 
 
