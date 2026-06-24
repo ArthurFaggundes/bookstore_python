@@ -1,17 +1,21 @@
 import pytest
 
-from ..serializers import ProductSerializer
-from ..models import Product
+from product.serializers.product_serializer import ProductSerializer
+from product.models import Product
+from product.factories import CategoryFactory
 
 
 @pytest.mark.django_db
 def test_product_serializer():
 
+    categories = CategoryFactory()
+
     # Criando o dict que será passado no atributo 'data' como referência pros testes.
     data = {
         "title": "Teste serializer",
         "description": "Testando o serializer",
-        "price": 999
+        "price": 999,
+        "categories_id": [categories.id]
     }
 
     # Testando a deserialização:

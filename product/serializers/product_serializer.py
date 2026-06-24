@@ -1,3 +1,5 @@
+# product\serializers\product_serializer.py
+
 from rest_framework import serializers
 
 from product.models.product import Category, Product
@@ -10,7 +12,7 @@ class ProductSerializer(serializers.ModelSerializer):
         queryset=Category.objects.all(), write_only=True, many=True
     )
 
-    class Meta:  # como se fosse um crate table
+    class Meta:
         model = Product
         fields = [
             "id",
