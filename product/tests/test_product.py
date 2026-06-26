@@ -1,16 +1,25 @@
 import pytest
 
-from product.models import Product
+from product.factories import ProductFactory
+from product.factories import CategoryFactory
+
+@pytest.fixture
+def product_created():
+    return ProductFactory(price=99)
 
 @pytest.mark.django_db
-def test_create_product():
-    product = Product.objects.create(
-        title="Titulo teste do produto",
-        description="Descrição de teste lalala",
-        price=999
-    )
+def test_product(product_created):
+    assert product_created.price == 99
+    assert product_created.categories != None
 
-    assert product.title == "Titulo teste do produto"
-    assert product.description == "Descrição de teste lalala"
-    assert product.price == 999
-    assert product.id is not None
+# =============================================================== #
+
+@pytest.fixture
+def category_created():
+    return CategoryFactory(title='eletronico', description='descricao_teste', active=False)
+
+@pytest.mark.django_db
+def test_category(category_created):
+    assert category_created.title == 'eletronico'
+    assert len(category_created.description) >= 10
+    assert category_created.active == False
