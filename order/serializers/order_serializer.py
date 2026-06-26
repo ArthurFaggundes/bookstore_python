@@ -1,3 +1,5 @@
+# order\serializers\order_serializer.py
+
 from rest_framework import serializers
 
 from order.models import Order
@@ -32,40 +34,3 @@ class OrderSerializer(serializers.ModelSerializer):
             order.product.add(product)
 
         return order
-
-#@ Explicação >>
-
-#! Cliente envia:
-
-#? {
-#?     "user": 1,
-#?     "products_id": [2, 5]
-#? }
-
-# ↓
-# Serializer valida.
-# ↓
-# Busca os produtos.
-# ↓
-# Cria o pedido.
-# ↓
-# Relaciona os produtos.
-# ↓
-
-#! Retorna:
-
-#? {
-#?     "product": [
-#?         {
-#?             "id": 2,
-#?             "name": "Mouse"
-#?         },
-#?         {
-#?             "id": 5,
-#?             "name": "Teclado"
-#?         }
-#?     ],
-#?     "total": 300,
-#?     "user": 1
-#? }
-
