@@ -17,6 +17,7 @@ class ProductFactory(factory.django.DjangoModelFactory): # para criar os produto
     price = factory.Faker("pyint") # sera INTs
     category = factory.LazyAttribute(CategoryFactory) # só cria quando necessario, invoca a classe de cima
     # mais comum usar >> category = factory.SubFactory(CategoryFactory)
+    description = factory.Faker("pystr")
     title = factory.Faker("pystr")
 
     @factory.post_generation # roda depois do produto criado
