@@ -5,7 +5,7 @@ from product import viewsets
 
 router = routers.SimpleRouter()
 router.register(r"product", viewsets.ProductViewSet, basename="product")
-router.register(r"category", viewsets.CategoryViewSet, basename="category")
+router.register(r"category", viewsets.CategoryViewSet, basename="category") # bookstore/v1/category
 
 urlpatterns = [
     path("", include(router.urls)),

@@ -21,6 +21,7 @@ class TestProductViewSet(APITestCase):
         self.product = ProductFactory(
             title="pro controller",
             price=200.00,
+            description="...",
         )
 
     def test_get_all_product(self): # verifica se api consegue lisatr os produtos
@@ -31,9 +32,10 @@ class TestProductViewSet(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         product_data = json.loads(response.content)
 
-        self.assertEqual(product_data["results"][0]["title"], self.product.title)
-        self.assertEqual(product_data["results"][0]["price"], self.product.price)
-        self.assertEqual(product_data["results"][0]["active"], self.product.active)
+        self.assertEqual(product_data[0]["title"], self.product.title)
+        self.assertEqual(product_data[0]["price"], self.product.price)
+        self.assertEqual(product_data[0]["description"], self.product.description)
+        self.assertEqual(product_data[0]["active"], self.product.active)
 
     def test_create_product(self):
         token = Token.objects.get(user__username=self.user.username) # precisa para ñ dar erro 401

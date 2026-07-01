@@ -18,7 +18,7 @@ class TestOrderViewSet(APITestCase): # especifica para APIs REST (cria bancos te
     def setUp(self): # executa antes de cada teste
         self.category = CategoryFactory(title="technology") # cria categoria especifica
         self.product = ProductFactory( # cria produto especifico
-            title="mouse", price=100, category=[self.category] # category=[self.category] -> pega o argumento de antes, nesse caso categoria: technology 
+            title="mouse", price=100, category=[self.category], description='...' # category=[self.category] -> pega o argumento de antes, nesse caso categoria: technology 
         )
         self.order = OrderFactory(product=[self.product]) # (product=[self.product], pega arg. de antes
 
@@ -30,17 +30,20 @@ class TestOrderViewSet(APITestCase): # especifica para APIs REST (cria bancos te
         order_data = json.loads(response.content) # pega o conteúdo e converte em dict #* também pode ser: order_data = response.data
 
         self.assertEqual( # verifica se o 1º produto do 1º pedido tem o título == mouse
-            order_data["results"][0]["product"][0]["title"], self.product.title
+            order_data[0]["product"][0]["title"], self.product.title
         )
         self.assertEqual(
-            order_data["results"][0]["product"][0]["price"], # -> onde procura
+            order_data[0]["product"][0]["price"], # -> onde procura
             self.product.price # -> o que procura
         )
         self.assertEqual(
-            order_data["results"][0]["product"][0]["active"], self.product.active
+            order_data[0]["product"][0]["active"], self.product.active
         )
         self.assertEqual(
-            order_data["results"][0]["product"][0]["category"][0]["title"],
+            order_data[0]["product"][0]["description"], self.product.description
+        )
+        self.assertEqual(
+            order_data[0]["product"][0]["category"][0]["title"],
             self.category.title,
         )
 
